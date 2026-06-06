@@ -34,10 +34,12 @@ define('NONCE_SALT', 'E=(w7Az6?avAMG3eLk5ub-p<}CubGpYqvY-#LmwY-*}b|_<DW4G20i_VWs
 
 define('WP_DEBUG', false);
 
-// Dynamic site URL
+// Dynamic site URL - use Vercel URL or fallback
+$host = getenv('VERCEL_URL') ?: getenv('VERCEL_BRANCH_URL') ?: ($_SERVER['HTTP_HOST'] ?? 'newsblog-taupe-two.vercel.app');
 $_SERVER['HTTPS'] = 'on';
-define('WP_SITEURL', 'https://' . ($_SERVER['HTTP_HOST'] ?? 'newsblog-taupe-two.vercel.app'));
-define('WP_HOME', 'https://' . ($_SERVER['HTTP_HOST'] ?? 'newsblog-taupe-two.vercel.app'));
+$_SERVER['HTTP_HOST'] = $host;
+define('WP_SITEURL', 'https://' . $host);
+define('WP_HOME', 'https://' . $host);
 
 // Security
 define('DISALLOW_FILE_EDIT', true);
