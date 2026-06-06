@@ -1,0 +1,1 @@
+.wpd-comment-info-bar : filtering buttons issue, switching between filters don't hide the previous results

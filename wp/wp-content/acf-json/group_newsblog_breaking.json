@@ -1,0 +1,59 @@
+{
+    "ID": 0,
+    "key": "group_newsblog_breaking",
+    "title": "Breaking News",
+    "fields": [
+        {
+            "ID": 0,
+            "key": "field_newsblog_breaking",
+            "label": "Mark as Breaking News",
+            "name": "breaking_news",
+            "aria-label": "",
+            "prefix": "acf",
+            "type": "true_false",
+            "value": null,
+            "menu_order": 0,
+            "instructions": "Enable to show this post in the breaking news ticker",
+            "required": false,
+            "id": "",
+            "class": "",
+            "conditional_logic": false,
+            "parent": "group_newsblog_breaking",
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "ui": 1,
+            "default_value": 0,
+            "_name": "breaking_news",
+            "_valid": 1,
+            "message": "",
+            "ui_on_text": "",
+            "ui_off_text": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": false,
+    "display_title": "",
+    "allow_ai_access": false,
+    "ai_description": "",
+    "local": "php",
+    "_valid": true
+}
