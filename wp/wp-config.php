@@ -6,9 +6,9 @@
 // Helper: get env var from $_ENV or getenv()
 function env($key, $default = null) {
     $val = getenv($key);
-    if ($val !== false && $val !== '') return $val;
-    if (isset($_ENV[$key]) && $_ENV[$key] !== '') return $_ENV[$key];
-    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') return $_SERVER[$key];
+    if ($val !== false && $val !== '') return trim($val);
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') return trim($_ENV[$key]);
+    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') return trim($_SERVER[$key]);
     return $default;
 }
 
@@ -25,12 +25,7 @@ if ($db_pass) define('DB_PASSWORD', $db_pass);
 $db_host = env('DB_HOST');
 if ($db_host) define('DB_HOST', $db_host);
 
-// Debug: write env status
-$dblog = '/tmp/wpdbg_' . md5(__FILE__) . '.log';
-$d = date('Y-m-d H:i:s');
-$envs = "DB_NAME=" . env('DB_NAME', 'NOT SET') . " DB_USER=" . env('DB_USER', 'NOT SET') . " DB_HOST=" . env('DB_HOST', 'NOT SET');
-$defined = "DEFINED: DB_NAME=" . (defined('DB_NAME') ? DB_NAME : 'NO') . " DB_USER=" . (defined('DB_USER') ? DB_USER : 'NO');
-@file_put_contents($dblog, "[$d] $envs | $defined\n", FILE_APPEND);
+
 
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
@@ -50,9 +45,7 @@ define('NONCE_SALT', 'E=(w7Az6?avAMG3eLk5ub-p<}CubGpYqvY-#LmwY-*}b|_<DW4G20i_VWs
 
 $table_prefix = env('TABLE_PREFIX', 'wp_');
 
-define('WP_DEBUG', true);
-define('WP_DEBUG_LOG', true);
-define('WP_DEBUG_DISPLAY', false);
+define('WP_DEBUG', false);
 
 $_SERVER['HTTPS'] = 'on';
 

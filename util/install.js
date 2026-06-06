@@ -1,7 +1,12 @@
 exports.validate = function(response) {
   let platform = 'Vercel';
 
-  if (process.env['DB_NAME'] && process.env['DB_USER'] && process.env['DB_PASSWORD'] && process.env['DB_HOST']) {
+  const dbName = (process.env['DB_NAME'] || '').trim();
+  const dbUser = (process.env['DB_USER'] || '').trim();
+  const dbPass = (process.env['DB_PASSWORD'] || '').trim();
+  const dbHost = (process.env['DB_HOST'] || '').trim();
+
+  if (dbName && dbUser && dbPass && dbHost) {
     return false;
   }
 
