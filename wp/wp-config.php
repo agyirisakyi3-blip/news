@@ -31,6 +31,9 @@ if (!defined('DB_USER')) define('DB_USER', 'root');
 if (!defined('DB_PASSWORD')) define('DB_PASSWORD', 'eHDoHfZyqIrFGxGNkCrEUVuvnTHpXkjX');
 if (!defined('DB_HOST')) define('DB_HOST', 'acela.proxy.rlwy.net:46798');
 
+// Skip SSL entirely for debugging
+define('MYSQL_CLIENT_FLAGS', 0);
+
 
 
 define('DB_CHARSET', 'utf8');
@@ -67,9 +70,27 @@ define('WP_HOME', 'https://' . $_SERVER['HTTP_HOST']);
 define('DISALLOW_FILE_EDIT', true);
 define('DISALLOW_FILE_MODS', true);
 
-// MySQL SSL (Railway requires SSL)
+// MySQL SSL - skip for now to test connection
 if (!env('SKIP_MYSQL_SSL')) {
-  define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT);
+  // define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT);
+}
+
+// Test DB connection early
+if (defined('DB_NAME') && defined('DB_HOST') && extension_loaded('mysqli')) {
+  $test_host = DB_HOST;
+  $test_port = 3306;
+  if (strpos($test_host, ':') !== false) {
+    list($test_host, $test_port) = explode(':', $test_host, 2);
+  }
+  $test_mysqli = @new mysqli($test_host, DB_USER, DB_PASSWORD, DB_NAME, (int)$test_port);
+  if ($test_mysqli->connect_error) {
+    header('Content-Type: text/plain');
+    die("MySQLi connection FAILED: " . $test_mysqli->connect_error . " (host=$test_host port=$test_port)");
+  }
+  $test_mysqli->close();
+} elseif (defined('DB_NAME') && !extension_loaded('mysqli')) {
+  header('Content-Type: text/plain');
+  die("MySQLi extension not loaded. PDO=" . (class_exists('PDO') ? implode(',', PDO::getAvailableDrivers()) : 'none'));
 }
 
 /* That's all, stop editing! Happy publishing. */
