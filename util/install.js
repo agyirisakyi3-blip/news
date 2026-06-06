@@ -1,7 +1,7 @@
 exports.validate = function(response) {
   let platform = 'Vercel';
 
-  if (process.env['DATABASE'] && process.env['USERNAME'] && process.env['PASSWORD'] && process.env['HOST']) {
+  if (process.env['DB_NAME'] && process.env['DB_USER'] && process.env['DB_PASSWORD'] && process.env['DB_HOST']) {
     return false;
   }
 
@@ -13,7 +13,7 @@ exports.validate = function(response) {
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ServerlessWP - Needs Database</title></head>
 <body>
-<p>ServerlessWP is installed! Add DATABASE, USERNAME, PASSWORD, HOST environment variables in your Vercel project settings and redeploy.</p>
+<p>ServerlessWP is installed! Add DB_NAME, DB_USER, DB_PASSWORD, DB_HOST environment variables in your Vercel project settings and redeploy.</p>
 </body></html>`
   };
 }

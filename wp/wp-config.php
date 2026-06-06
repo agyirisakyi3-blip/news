@@ -4,17 +4,17 @@
  */
 
 // ** Database settings - from environment variables ** //
-if (isset($_ENV['DATABASE'])) {
-  define( 'DB_NAME', $_ENV['DATABASE'] );
+if (isset($_ENV['DB_NAME'])) {
+  define( 'DB_NAME', $_ENV['DB_NAME'] );
 }
-if (isset($_ENV['USERNAME'])) {
-  define( 'DB_USER', $_ENV['USERNAME'] );
+if (isset($_ENV['DB_USER'])) {
+  define( 'DB_USER', $_ENV['DB_USER'] );
 }
-if (isset($_ENV['PASSWORD'])) {
-  define( 'DB_PASSWORD', $_ENV['PASSWORD'] );
+if (isset($_ENV['DB_PASSWORD'])) {
+  define( 'DB_PASSWORD', $_ENV['DB_PASSWORD'] );
 }
-if (isset($_ENV['HOST'])) {
-  define( 'DB_HOST', $_ENV['HOST'] );
+if (isset($_ENV['DB_HOST'])) {
+  define( 'DB_HOST', $_ENV['DB_HOST'] );
 }
 
 define( 'DB_CHARSET', 'utf8' );
