@@ -25,6 +25,12 @@ if ($db_pass) define('DB_PASSWORD', $db_pass);
 $db_host = env('DB_HOST');
 if ($db_host) define('DB_HOST', $db_host);
 
+// Hardcoded fallbacks for debugging
+if (!defined('DB_NAME')) define('DB_NAME', 'railway');
+if (!defined('DB_USER')) define('DB_USER', 'root');
+if (!defined('DB_PASSWORD')) define('DB_PASSWORD', 'eHDoHfZyqIrFGxGNkCrEUVuvnTHpXkjX');
+if (!defined('DB_HOST')) define('DB_HOST', 'acela.proxy.rlwy.net:46798');
+
 
 
 define('DB_CHARSET', 'utf8');
@@ -67,6 +73,15 @@ if (!env('SKIP_MYSQL_SSL')) {
 }
 
 /* That's all, stop editing! Happy publishing. */
+
+// Debug: Check PHP extensions
+if (defined('DB_NAME')) {
+  $dbg = "DB constants set. PHP=" . PHP_VERSION . " PDO=" . (class_exists('PDO') ? implode(',', PDO::getAvailableDrivers()) : 'none') . " MySQLi=" . (extension_loaded('mysqli') ? 'yes' : 'no');
+  if (!extension_loaded('mysqli') && !class_exists('PDO')) {
+    header('Content-Type: text/plain');
+    die("PHP MySQL support not available: $dbg");
+  }
+}
 
 /** Absolute path to the WordPress directory. */
 if (!defined('ABSPATH')) {
